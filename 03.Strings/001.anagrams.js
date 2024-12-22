@@ -1,11 +1,15 @@
-// return true if 2ns string is anagram of 1st string
+// return true if 2nd string is anagram of 1st string
+// validAnagrams('hello', 'lleho') -> true
+// validAnagrams('hello', 'lleoo') -> false
+// validAnagrams('rat', 'crate') -> false
 
+// Using frequency counters -> O(n)
 const validAnagram = (str1, str2) => {
-    if(str1.length !== str2.length) return false;
+    if (str1.length !== str2.length) return false;
 
     let str1freq = {};
 
-    for(let char of str1) {
+    for (let char of str1) {
         str1freq[char] = (str1freq[char] || 0) + 1;
     }
 
@@ -20,9 +24,9 @@ const validAnagram = (str1, str2) => {
     //     if(str1freq[key] !== str2freq[key]) return false;
     // }
 
-    for(let i=0; i<str2.length; i++) {
+    for (let i = 0; i < str2.length; i++) {
         let letter = str2[i];
-        if(!str1freq[letter]) return false;
+        if (!str1freq[letter]) return false;
         else {
             str1freq[letter] -= 1;
         }
