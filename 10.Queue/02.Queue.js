@@ -56,4 +56,14 @@ class Queue {
         this.size--;
         return oldHead.val;
     }
+
+    // This method returns the element at the front of the queue without removing it.
+    peek() {
+        if (!this.first) return null;
+        return this.first.val;
+    }
+
+    empty() {
+        return this.size === 0;
+    }
 }
