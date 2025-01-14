@@ -101,4 +101,126 @@ class BinarySearchTree {
         if (!found) return false;
         return current;
     }
+
+
+    // *** PSEUDOCODE for Breadth First Search (BFS) ***
+
+    // - Create a queue (can be an array) and a variable to store the value of nodes visited
+    // - Place root node in the queue
+    // - Loop as long as there is anything in the queue
+    //     - Dequeue a node from queue and push the value of node into the variable that stores the node
+    //     - If there is left property on the node that is dequeued - add it to the queue
+    //     - If there is right property on the node that is dequeued - add it to the queue
+    // - Return the variable that stores the value
+
+    // ------> 10
+    //        /  \
+    // ----> 6 -> 15
+    //     /  \    \
+    // -> 3 -> 8 -> 20 
+    // [10, 6, 15, 3, 8, 20]
+
+    BFS() {
+        let node = this.root,
+            data = [],
+            queue = [];
+
+        queue.push(node);
+
+        while (queue.length) {
+            node = queue.shift();
+            data.push(node.value);
+            if (node.left) queue.push(node.left);
+            if (node.right) queue.push(node.right);
+        }
+
+        return data;
+    }
+
+
+    // *** PSEUDOCODE for Depth First Search (DFS) - PreOrder ***
+
+    // - Create a variable to store the value of nodes visited
+    // - Store the root of BST in a variable (current)
+    // - Write a helper fn. which accepts a node
+    //     - Push the value of node to the variable that stores value
+    //     - If node has left property, call helper with left property
+    //     - If node has right property, call helper with right property
+    // - Invoke the helper fn with current/root node
+    // - Return the array of values
+
+    //  |       10
+    //  |      /  \
+    //  |     6   15
+    //  |    / \    \
+    //  V   3   8   20 
+    //    [10, 6, 3, 8, 15, 20]
+
+    DFSPreOrder() {
+        let data = [];
+
+        function traversePreOrder(node) {
+            data.push(node.value);
+            if (node.left) traversePreOrder(node.left);
+            if (node.right) traversePreOrder(node.right);
+        }
+
+        traversePreOrder(this.root);
+        return data;
+    }
+
+
+    // *** PSEUDOCODE for Depth First Search (DFS) - PostOrder ***
+
+    // - The difference is :
+    // - In PreOrder, we pushed data to list and then checked left and right of node
+    // - In PostOrder, we will check left and right of node and then push the node to list
+
+    //  |       10
+    //  |      /  \
+    //  |     6   15
+    //  |    / \    \
+    //  V   3   8   20 
+    //    [3, 8, 6, 20, 15, 10]
+
+    DFSPostOrder() {
+        let data = [];
+
+        function traversePostOrder(node) {
+            if (node.left) traversePostOrder(node.left);
+            if (node.right) traversePostOrder(node.right);
+            data.push(node.value);
+        }
+
+        traversePostOrder(this.root);
+        return data;
+    }
+
+
+    // *** PSEUDOCODE for Depth First Search (DFS) - InOrder ***
+
+    // - The difference is :
+    // - In PreOrder, we pushed data to list and then checked left and right of node
+    // - In PostOrder, we will check left and right of node and then push the node to list
+    // - In InOrder, we will check left and push the value/node to lsit and then right
+
+    //  |       10
+    //  |      /  \
+    //  |     6   15
+    //  |    / \    \
+    //  V   3   8   20 
+    //    [3, 6, 8, 10, 15, 20]
+
+    DFSInOrder() {
+        let data = [];
+
+        function traverseInOrder(node) {
+            if (node.left) traverseInOrder(node.left);
+            data.push(node.value);
+            if (node.right) traverseInOrder(node.right);
+        }
+
+        traverseInOrder(this.root);
+        return data;
+    }
 }
